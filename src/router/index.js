@@ -33,7 +33,7 @@ export default new Router({
     {
       path: '/HelloWorld',
       name: 'HelloWorld',
-      component: r => require.ensure([], () => r(require('../assets/mark/mark1.md')))      
+      component: HelloWorld      
     },
   ]
 })
