@@ -23,5 +23,6 @@
 <style scoped>
   #wzc_select {
     margin: 30px auto;
+    background-color: 'red';
   }
 </style>
