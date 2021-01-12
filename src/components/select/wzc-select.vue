@@ -90,5 +90,10 @@ export default {
         cursor: pointer;
         color: #D3DCE6;
     }
-    
+    .wzc_option_list {
+        border-radius:5px;
+        border:1px solid #E4E7ED;
+        width: 100%;
+        margin-top: 10px;
+    }
 </style>
