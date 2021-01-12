@@ -7,10 +7,12 @@
                 <!-- 三角形图标 -->
                 <div class="imgthree fa fa-caret-up"></div>
             </div>
-            <!-- 下拉框列表 -->
-            <div class="Selectlist" v-show="true">
+        </div>
+        <!-- 下拉框列表 -->
+        <div class="Selectlist" v-show="true">
+            <ul class="wzc_option_list">
                 <slot name="wzc_option"></slot>
-            </div>
+            </ul>
         </div>
     </div>
 </template>
