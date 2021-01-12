@@ -1,19 +1,15 @@
 <template>
-    <div id="wzc_select" :style="{ 'width': width + 'px', 'height': height + 'px', 'line-height': height + 'px'}">
+    <div id="wzc_select" :style="styleVar">
         <div class="divSelect">
             <div class="divSelectinput">
                 <!-- 选中后的内容 -->
-                <div class="selectinfos" :title="selectedTitle"> {{ selectedTitle }} </div>
+                <div class="selectinfos" :title="selectedTitle" :class="{ 'no_select': selectedTitle == placeholder }"> {{ selectedTitle }} </div>
                 <!-- 三角形图标 -->
-                <div class="imgthree"></div>
+                <div class="imgthree fa fa-caret-up"></div>
             </div>
             <!-- 下拉框列表 -->
-            <div class="Selectlist" v-show="false">
-                <ul>
-                    <!-- <li v-for="(item, index) in Files" :key="item.value" @click="changeSelect(item.FileName)">
-                        {{ item.FileName }}
-                    </li> -->
-                </ul>
+            <div class="Selectlist" v-show="true">
+                <slot name="wzc_option"></slot>
             </div>
         </div>
     </div>
@@ -24,33 +20,37 @@ export default {
     name:'wzc_select',
     components: {},
     props: {
-        showlist:{
-            type: Array,
-            default: []
-        },
         placeholder: {
             type: String,
             default: '请选择'
         },
         width: {
             type: Number,
-            default: '180'
+            default: 180
         },
         height: {
             type: Number,
-            default: '40'
+            default: 40
         },
     },
     data() {
         return {
-            selectedTitle: ''
+            selectedTitle: '',
+            
         };
     },
     created() {
         this.selectedTitle = this.placeholder;
     },
     mounted() {},
-    computed: {},
+    computed: {
+        styleVar() {
+            return {
+                '--select-height': this.height + 'px',
+                '--select-width': this.width + 'px'
+            }
+        }
+    },
     methods: {},
 };
 </script>
@@ -58,6 +58,9 @@ export default {
     #wzc_select {
         border: 1px solid #E6E6E6;
         border-radius: 5px;
+        height: var(--select-height);
+        width: var(--select-width);
+        line-height: var(--select-height);
     }
     .divSelect {
         width: 100%;
@@ -71,8 +74,19 @@ export default {
     }
     .selectinfos {
         width: 87.5%;
+        cursor: pointer;
+    }
+    .no_select {
+        color: #D3DCE6;
     }
     .imgthree {
         width: 12.5%;
+        line-height: var(--select-height);
+        text-align: center;
     }
+    .imgthree:before {
+        cursor: pointer;
+        color: #D3DCE6;
+    }
+    
 </style>

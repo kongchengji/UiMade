@@ -8,6 +8,7 @@ import './assets/font/font.css'
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-light.css';
 import 'github-markdown-css';
+import 'font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
 

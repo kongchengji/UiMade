@@ -61,7 +61,6 @@ export default {
     urlCheck() {
       let self = this;
       let filename = this.getFileName(window.location.href)
-      console.log(filename)
       if( filename != '' ) {
         for(let i = 0; i < this.navName.itemList.length; i++) {
           if( filename == this.getFileName(this.navName.itemList[i].itemHref) ) {
