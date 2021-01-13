@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <h1> 选择器组件 </h1>
     <wzcSelect :width="240" :height="50">
       <template v-slot:wzc_option>
 				<wzc_option v-for="(item) in showlist"
@@ -8,6 +9,8 @@
         :optionid="item.item_id"></wzc_option>
 			</template>
     </wzcSelect>
+
+    <h1> 按钮组件 </h1>
   </div>
 </template>
 
