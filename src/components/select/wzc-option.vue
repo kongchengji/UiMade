@@ -1,5 +1,5 @@
 <template>
-  <li class="wzc_option" :style="styleVar">
+  <li class="wzc_option" :style="styleVar" @click="currentSelect">
     <div class="wzc_option_dropdown_item">{{ label }}</div>
   </li>
 </template>
@@ -11,7 +11,7 @@ export default {
   props: {
     width: {
       type: Number,
-      default: 200,
+      default: -1,
     },
     height: {
       type: Number,
@@ -34,11 +34,19 @@ export default {
     styleVar() {
       return {
         "--option-height": this.height + "px",
-        "--option-width": this.width + "px",
+        "--option-width": this.width == -1? "100%" : this.width + "px",
       };
     },
   },
-  methods: {},
+  methods: {
+    currentSelect() {
+      console.log(this.$parent.label)
+      this.$parent.label = this.label;
+      this.$parent.optionid = this.optionid;
+      this.$parent.isListShow = !this.$parent.isListShow;
+      // this.$emit('slot-content', {label: this.label, optionid: this.optionid} );
+    }
+  },
 };
 </script>
 <style scoped>

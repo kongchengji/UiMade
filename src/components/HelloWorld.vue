@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <wzcSelect :width="200" :height="50">
+    <wzcSelect :width="240" :height="50">
       <template v-slot:wzc_option>
 				<wzc_option v-for="(item) in showlist"
         :key="item.item_id"
@@ -35,8 +35,15 @@
             item_name: '选项2',
             item_id: '2',
           },
+          {
+            item_name: '选项3',
+            item_id: '3',
+          },
         ]
       }
+    },
+    methods: {
+      
     }
   }
 </script>
