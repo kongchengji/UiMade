@@ -35,15 +35,8 @@
             item_name: '选项2',
             item_id: '2',
           },
-          {
-            item_name: '选项3',
-            item_id: '3',
-          },
         ]
       }
-    },
-    methods: {
-      
     }
   }
 </script>

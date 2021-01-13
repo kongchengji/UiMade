@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     currentSelect() {
-      console.log(this.$parent.label)
       this.$parent.label = this.label;
       this.$parent.optionid = this.optionid;
       this.$parent.isListShow = !this.$parent.isListShow;

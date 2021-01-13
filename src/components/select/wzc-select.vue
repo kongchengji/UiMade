@@ -9,8 +9,8 @@
             </div>
         </div>
         <!-- 下拉框列表 -->
-        <transition name="drop-down" ref="dropSown">
-            <div class="Selectlist" v-show="isListShow">
+        <transition name="drop-down" >
+            <div class="Selectlist" v-show="isListShow" ref="dropDown">
                 <div class="select_triangle"></div>
                 <ul class="wzc_option_list">
                     <slot name="wzc_option"></slot>
@@ -50,10 +50,11 @@ export default {
     },
     mounted() {
         let _this = this;
-        document.addEventListener("click", function(e){
-            console.log(_this.$refs.divSelect)
-            console.log(_this.$refs.dropDown)
-            // if(_this.$refs)
+        document.addEventListener("click", function( e ){
+            if ( !!_this.$refs.divSelect.contains(e.target) || !!_this.$refs.dropDown.contains(e.target) ) 
+                return;
+            else
+                _this.isListShow = false;
         })
     },
     computed: {
@@ -82,9 +83,10 @@ export default {
     .divSelect {
         width: 100%;
         height: 100%;
+        border-radius: 5px;
     }
     .drop_down {
-        box-shadow: 0px 0px 5px #709DF7;
+        box-shadow: 0px 0px 6px #709DF7;
     }
     .divSelectinput {
         width: calc(100% - 20px);
@@ -122,7 +124,7 @@ export default {
         border:1px solid #E4E7ED;
         width: 100%; 
         padding: 3px 0px;
-        box-shadow: 0px 0px 5px #709DF7;
+        box-shadow: 0px 0px 6px #709DF7;
     }
     .select_triangle {
         width: 14px;
