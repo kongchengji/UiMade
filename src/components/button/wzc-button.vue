@@ -3,9 +3,13 @@
         typeclass ,
         { 'is-plain': plain },
         { 'is-round': round },
-        { 'is-circle': circle }
+        { 'is-circle': circle },
+        { 'is-disabled': disabled }
     ]">
-        <span>
+        <span class="wzc_button_loading" v-if="loading">
+            <i class="fa fa-spinner fa-spin" aria-hidden="true" ></i> 加载中
+        </span>
+        <span class="wzc_button_contain" v-else>
             <slot></slot>
         </span>
     </div>
@@ -32,19 +36,32 @@ export default {
             type: Boolean,
             default: false
         },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        loading: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
-            typeclass: 'default'
+            typeclass: 'default',
         };
     },
     created() {},
     mounted() {
         this.typeclass = 'wzc_button_' + this.type;
     },
-    watch: {},
+    watch: {
+        type (type){
+            this.typeclass = 'wzc_button_' + type;
+        }
+    },
     computed: {},
-    methods: {},
+    methods: {
+    },
 };
 </script>
 <style scoped>
@@ -65,7 +82,7 @@ export default {
         -ms-user-select: none;
         -moz-user-select: none;
     }
-    .wzc_button:hover {
+    .wzc_button:not(.is-disabled):hover {
         background-color: #ECF5FF;
         border-color: #B3D8FF;
         color: #409eff;
@@ -75,7 +92,7 @@ export default {
         background-color: #409eff;
         border-color: #409eff;
     }
-    .wzc_button_primary:hover {
+    .wzc_button_primary:not(.is-disabled):hover {
         color: #fff;
         background-color: #66b1ff;
         border-color: #66b1ff;
@@ -85,7 +102,7 @@ export default {
         background-color: #67c23a;
         border-color: #67c23a;
     }
-    .wzc_button_success:hover {
+    .wzc_button_success:not(.is-disabled):hover {
         color: #fff;
         background-color: #85ce61;
         border-color: #85ce61;
@@ -95,7 +112,7 @@ export default {
         background-color: #909399;
         border-color: #909399;
     }
-    .wzc_button_info:hover {
+    .wzc_button_info:not(.is-disabled):hover {
         color: #fff;
         background-color: #a6a9ad;
         border-color: #a6a9ad;
@@ -105,7 +122,7 @@ export default {
         background-color: #e6a23c;
         border-color: #e6a23c;
     }
-    .wzc_button_warning:hover {
+    .wzc_button_warning:not(.is-disabled):hover {
         color: #fff;
         background-color: #ebb563;
         border-color: #ebb563;
@@ -115,13 +132,13 @@ export default {
         background-color: #f56c6c;
         border-color: #f56c6c;
     }
-    .wzc_button_danger:hover {
+    .wzc_button_danger:not(.is-disabled):hover {
         color: #fff;
         background-color: #f78989;
         border-color: #f78989;
     }
     /* ****************  plain  **************** */
-    .wzc_button.is-plain:hover {
+    .wzc_button.is-plain:not(.is-disabled):hover {
         background-color: #fff;
         border-color: #409eff;
         color: #409eff;
@@ -131,7 +148,7 @@ export default {
         background-color: #ecf5ff;
         border-color: #b3d8ff;
     }
-    .wzc_button_primary.is-plain:hover {
+    .wzc_button_primary.is-plain:not(.is-disabled):hover {
         color: #fff;
         background-color: #409eff;
         border-color: #409eff;
@@ -141,7 +158,7 @@ export default {
         background: #f0f9eb;
         border-color: #c2e7b0;
     }
-    .wzc_button_success.is-plain:hover {
+    .wzc_button_success.is-plain:not(.is-disabled):hover {
         color: #fff;
         background-color: #85ce61;
         border-color: #85ce61;
@@ -151,7 +168,7 @@ export default {
         background: #f4f4f5;
         border-color: #d3d4d6;
     }
-    .wzc_button_info.is-plain:hover {
+    .wzc_button_info.is-plain:not(.is-disabled):hover {
         color: #fff;
         background-color: #909399;
         border-color: #909399;
@@ -161,7 +178,7 @@ export default {
         background: #fdf6ec;
         border-color: #f5dab1;
     }
-    .wzc_button_warning.is-plain:hover {
+    .wzc_button_warning.is-plain:not(.is-disabled):hover {
         color: #fff;
         background-color: #e6a23c;
         border-color: #e6a23c;
@@ -171,28 +188,28 @@ export default {
         background: #fef0f0;
         border-color: #fbc4c4;
     }
-    .wzc_button_danger.is-plain:hover {
+    .wzc_button_danger.is-plain:not(.is-disabled):hover {
         color: #fff;
         background-color: #f56c6c;
         border-color: #f56c6c;
     }
     /* *****************  active  ********************** */
-    .wzc_button_default:active, .wzc_button_default.is-plain:active {
+    .wzc_button_default:not(.is-disabled):active, .wzc_button_default.is-plain:not(.is-disabled):active {
         border: 1px solid #3e9fd4;
     }
-    .wzc_button_primary:active, .wzc_button_primary.is-plain:active {
+    .wzc_button_primary:not(.is-disabled):active, .wzc_button_primary:not(.is-disabled).is-plain:active {
         background-color: #0b8cd2;
     }
-    .wzc_button_success:active, .wzc_button_success.is-plain:active{
+    .wzc_button_success:not(.is-disabled):active, .wzc_button_success.is-plain:not(.is-disabled):active{
         background-color: #22b422;
     }
-    .wzc_button_info:active, .wzc_button_info.is-plain:active{
+    .wzc_button_info:not(.is-disabled):active, .wzc_button_info.is-plain:not(.is-disabled):active{
         background-color: rgb(130, 132, 138);
     }
-    .wzc_button_warning:active, .wzc_button_warning.is-plain:active{
+    .wzc_button_warning:not(.is-disabled):active, .wzc_button_warning.is-plain:not(.is-disabled):active{
         background-color: rgb(207, 146, 54);
     }
-    .wzc_button_danger:active, .wzc_button_danger.is-plain:active{
+    .wzc_button_danger:not(.is-disabled):active, .wzc_button_danger.is-plain:not(.is-disabled):active{
         background-color: rgb(221, 97, 97);
     }
     /* *****************  round  ********************** */
@@ -203,5 +220,14 @@ export default {
     .wzc_button.is-circle {
         border-radius: 50%;
         width: 40px;
+    }
+    /* *****************  disabled  ********************** */
+    .wzc_button.is-disabled, .wzc_button.is-disabled:active, .wzc_button.is-disabled:hover {
+        cursor: not-allowed;
+        opacity: .6;
+        filter: alpha(opacity=60);
+    }
+    .wzc_button_contain .fa {
+        margin: 0px 5px;
     }
 </style>

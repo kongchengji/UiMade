@@ -5,7 +5,7 @@
                 <!-- 选中后的内容 -->
                 <div class="selectinfos" :title="label" :class="{ 'no_select': label == '请选择' }"> {{ label }} </div>
                 <!-- 三角形图标 -->
-                <div class="imgthree fa fa-caret-up" :class="{ 'is-reverse': isListShow }"></div>
+                <i class="imgthree fa fa-caret-up" :class="{ 'is-reverse': isListShow }"></i>
             </div>
         </div>
         <!-- 下拉框列表 -->
