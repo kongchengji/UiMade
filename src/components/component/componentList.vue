@@ -1,16 +1,16 @@
 <template>
   <div id="componentList">
-      <catalog :chapter-list='chapterList'  ></catalog>
+      <wzc-catalog :chapter-list='chapterList'  ></wzc-catalog>
   </div>
 </template>
 
 <script>
-    import catalog from '../catalog/wzc-catalog'
+    import wzcCatalog from '../catalog/wzc-catalog'
     import markdownShow from '../markdownShow/markdownShow'
     import $ from 'jquery'
     export default {
         name: 'componentList',
-        components: { catalog },
+        components: { wzcCatalog },
         props: {},
         data() {
             return {
@@ -57,7 +57,7 @@
         display: flex;
         
     }
-    #catalog {
+    .wzc_catalog {
         width: 260px;
         border-right: 1px dotted #333;
         box-sizing: border-box;

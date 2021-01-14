@@ -1,5 +1,5 @@
 <template>
-    <div id="wzc_select" :style="styleVar" >
+    <div class="wzc_select" :style="styleVar" >
         <div class="divSelect" :class="{ 'drop_down': isListShow }" ref="divSelect" >
             <div class="divSelectinput" @click="dropDownSelect">
                 <!-- 选中后的内容 -->
@@ -51,10 +51,12 @@ export default {
     mounted() {
         let _this = this;
         document.addEventListener("click", function( e ){
-            if ( !!_this.$refs.divSelect.contains(e.target) || !!_this.$refs.dropDown.contains(e.target) ) 
-                return;
-            else
-                _this.isListShow = false;
+            if(_this.$refs.divSelect) {
+                if ( !!_this.$refs.divSelect.contains(e.target) || !!_this.$refs.dropDown.contains(e.target) ) 
+                    return;
+                else
+                    _this.isListShow = false;
+            }   
         })
     },
     computed: {
@@ -73,7 +75,7 @@ export default {
 };
 </script>
 <style scoped>
-    #wzc_select {
+    .wzc_select {
         border: 1px solid #E6E6E6;
         border-radius: 5px;
         height: var(--select-height);
@@ -118,6 +120,9 @@ export default {
 
     .Selectlist {
         margin-top: 10px;
+        z-index: 800;
+        position: relative;
+        background-color: #fff;
     }
     .wzc_option_list {
         border-radius:5px;
@@ -125,6 +130,7 @@ export default {
         width: 100%; 
         padding: 3px 0px;
         box-shadow: 0px 0px 6px #709DF7;
+        background-color: #fff;
     }
     .select_triangle {
         width: 14px;

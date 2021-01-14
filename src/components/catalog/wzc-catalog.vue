@@ -1,5 +1,5 @@
 <template>
-  <div id="catalog">
+  <div class="wzc_catalog">
       <div class="catalog_item" v-for="(item,index) in chapterList" :key="index"
       :class="['cataType' + item.type , {'selected': currentId == item.id }] " >
           <a class="catalog_item_a" :href="item.href" @click="cataSelect(item)"> {{ item.title }} </a> 
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: 'catalog',
+    name: 'wzc-catalog',
     components: {},
     props: {
         chapterList: {
@@ -52,7 +52,7 @@ export default {
 };
 </script>
 <style scoped>
-    #catalog{
+    .wzc_catalog{
         padding-top: 50px;
         padding-left: 15px;
         overflow-y: scroll;

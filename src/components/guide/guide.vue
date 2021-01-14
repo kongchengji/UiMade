@@ -63,7 +63,7 @@
         display: flex;
         
     }
-    #catalog {
+    .wzc_catalog {
         width: 260px;
         border-right: 1px dotted #333;
         box-sizing: border-box;
