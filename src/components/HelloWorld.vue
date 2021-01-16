@@ -10,6 +10,14 @@
 			</template>
     </wzcSelect>
 
+    <h2> switch开关 </h2>
+    <div class="buttonlist">
+      <wzc_switch
+        ctive-color="#13ce66"
+        inactive-color="#ff4949">
+      </wzc_switch>
+    </div>
+
     <h2> 按钮组件 </h2>
     <h3> 基础用法 </h3>
     <div class="buttonlist">
@@ -81,10 +89,11 @@
   import wzcSelect from './select/wzc-select' 
   import wzc_option from './select/wzc-option'
   import wzc_button from './button/wzc-button'
+  import wzc_switch from './Switch/wzc-switch'
   export default {
     name: 'HelloWorld',
     components: { 
-      wzcSelect, wzc_option, wzc_button
+      wzcSelect, wzc_option, wzc_button,wzc_switch
     },
     data () {
       return {
