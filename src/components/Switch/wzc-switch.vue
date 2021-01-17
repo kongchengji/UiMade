@@ -1,5 +1,6 @@
 <template>
-  <div class="wzc_switch" :style="styleVar">
+  <div class="wzc_switch" :style="styleVar" 
+  @click="switchClick" :class="{ 'is-click': value, 'is-disabled': disabled }">
       <span class="wzc_switch_core"></span>
   </div>
 </template>
@@ -9,29 +10,34 @@ export default {
     name:'wzc_switch',
     components: {},
     props: {
-        content: {
-            type: String,
-            default: ''
-        },
         width: {
             type: Number,
-            default: 40
+            default: 45
         },
         activeColor: {
             type: String,
-            default: '#13ce66'
+            default: '#dcdfe6'
         },
         inactiveColor: {
             type: String,
             default: '#dcdfe6'
         },
+        value : {
+            type: Boolean,
+            default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
     },
     data() {
         return {
+
         };
     },
     created() {},
-    mounted() {
+    mounted() {      
     },
     watch: {
     },
@@ -45,6 +51,12 @@ export default {
         }
     },
     methods: {
+        switchClick () {
+            if(!this.disabled) {
+                let nowvalue = !this.value;
+                this.$emit('update:value', nowvalue);
+            }
+        },
     },
 }
 </script>
@@ -61,6 +73,7 @@ export default {
         border-radius: 10px;
         box-sizing: border-box;
         cursor: pointer;
+        transition: border-color .3s,background-color .3s;
     }
     .wzc_switch_core::after {
         content: "";
@@ -71,5 +84,19 @@ export default {
         width: 16px;
         height: 16px;
         background-color: #fff;
+        transition: all .3s;
+    }
+    .is-click .wzc_switch_core::after {
+        left: 100%;
+        margin-left: -17px;
+    }
+    .is-click .wzc_switch_core {
+        border: 1px solid var(--switch-active-color);
+        background-color: var(--switch-active-color);
+    }
+    .is-disabled .wzc_switch_core {
+        cursor: not-allowed;
+        opacity: .6;
+        filter: alpha(opacity=60);
     }
 </style>
