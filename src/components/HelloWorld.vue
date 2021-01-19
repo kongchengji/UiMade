@@ -12,6 +12,15 @@
       </template>
     </wzcSelect>
 
+    <h2>折叠面板</h2>
+    <div>
+      <div class="buttonlist">
+        <wzc_collapse>
+          <wzc_collapse_item></wzc_collapse_item>
+        </wzc_collapse>
+      </div>
+    </div>
+
     <h2>switch开关</h2>
     <div>
       <div class="buttonlist">
@@ -144,6 +153,8 @@ import wzcSelect from "./select/wzc-select";
 import wzc_option from "./select/wzc-option";
 import wzc_button from "./button/wzc-button";
 import wzc_switch from "./Switch/wzc-switch";
+import wzc_collapse from "./Collapse/wzc-collapse";
+import wzc_collapse_item from "./Collapse/wzc-collapse-item";
 export default {
   name: "HelloWorld",
   components: {
@@ -151,6 +162,8 @@ export default {
     wzc_option,
     wzc_button,
     wzc_switch,
+    wzc_collapse,
+    wzc_collapse_item,
   },
   data() {
     return {

@@ -74,6 +74,7 @@
     }
     .showCon {
         height: 100%;
-        width: 840px;
+        width: 780px;
+        padding: 0px 30px;
     }
 </style>

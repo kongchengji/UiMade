@@ -7,7 +7,7 @@
         { 'is-disabled': disabled }
     ]">
         <span class="wzc_button_loading" v-if="loading">
-            <i class="fa fa-spinner fa-spin" aria-hidden="true" ></i> 加载中
+            <i class="fa fa-spinner fa-pulse" aria-hidden="true" ></i> 加载中
         </span>
         <span class="wzc_button_contain" v-else>
             <slot></slot>

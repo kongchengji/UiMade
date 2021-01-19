@@ -21,14 +21,20 @@ export default new Router({
       component: guide,
       children: [
         // markdown 会被渲染在 guide 的 <router-view> 中
-        { path: '/guide/useIntroduct', component: r => require.ensure([], () => r(require('../assets/mark/markdown01.md')))   },
-        { path: '/guide/design', component: r => require.ensure([], () => r(require('../assets/mark/markdown02.md')))   },
+        { path: '/guide/useIntroduct', component: r => require.ensure([], () => r(require('../components/select/wzc-select.md')))   },
+        { path: '/guide/design', component: r => require.ensure([], () => r(require('../components/button/wzc-button.md')))   },
       ]
     },
     {
       path: '/compentList',
       name: 'compentList',
-      component: compentList
+      component: compentList,
+      children: [ 
+        { path: '/compentList/log', component: r => require.ensure([], () => r(require('../components/select/wzc-select.md'))) },
+        { path: '/compentList/button', component: r => require.ensure([], () => r(require('../components/button/wzc-button.md'))) },
+        { path: '/compentList/select', component: r => require.ensure([], () => r(require('../components/select/wzc-select.md'))) },
+        { path: '/compentList/switch', component: r => require.ensure([], () => r(require('../components/Switch/wzc-switch.md'))) }
+      ]
     },
     {
       path: '/HelloWorld',

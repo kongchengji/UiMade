@@ -1,6 +1,11 @@
 <template>
   <div id="componentList">
-      <wzc-catalog :chapter-list='chapterList'  ></wzc-catalog>
+        <wzc-catalog :chapter-list='chapterList'  ></wzc-catalog>
+        <div id="markdownShow">
+            <div class="showCon markdown-body" >
+                <router-view/>
+            </div>
+        </div>
   </div>
 </template>
 
@@ -28,6 +33,18 @@
                         href: '#/compentList',
                     },
                     {
+                        title: 'B',
+                        type: '4',
+                        id: 'headline_B',
+                        href: '#/compentList',
+                    },
+                    {
+                        title: 'Button 按钮组件',
+                        type: '2',
+                        id: 'Button',
+                        href: '#/compentList/button',
+                    },
+                    {
                         title: 'S',
                         type: '4',
                         id: 'headline_S',
@@ -37,7 +54,13 @@
                         title: 'Select 选择器',
                         type: '2',
                         id: 'selectBox',
-                        href: '#/compentList',
+                        href: '#/compentList/select',
+                    },
+                    {
+                        title: 'Switch 开关',
+                        type: '2',
+                        id: 'switch',
+                        href: '#/compentList/switch',
                     }
                 ]
             };
@@ -61,5 +84,14 @@
         width: 260px;
         border-right: 1px dotted #333;
         box-sizing: border-box;
+    }
+    #markdownShow {
+        width: calc(100% - 260px);
+        overflow-y: scroll;
+    }
+    .showCon {
+        height: 100%;
+        width: 780px;
+        padding: 0px 30px;
     }
 </style>

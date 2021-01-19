@@ -2,7 +2,7 @@
   <div class="wzc_catalog">
       <div class="catalog_item" v-for="(item,index) in chapterList" :key="index"
       :class="['cataType' + item.type , {'selected': currentId == item.id }] " >
-          <a class="catalog_item_a" :href="item.href" @click="cataSelect(item)"> {{ item.title }} </a> 
+          <a class="catalog_item_a" :href="hrefSelect(item)" @click="cataSelect(item)"> {{ item.title }} </a> 
       </div>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default {
     },
     mounted() {
         this.urlCheck();
-        console.log(this.chapterList)
     },
     methods: {
         cataSelect (item){
@@ -45,6 +44,11 @@ export default {
         getFileName( url ) {
             url = url.substring(url.lastIndexOf('/'));
             return url;
+        },
+        hrefSelect( item ) {
+            if(this.currentId == item.id) {
+                return item.href;
+            }
         }
     },
     created() {},
