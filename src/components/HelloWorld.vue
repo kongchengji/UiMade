@@ -12,6 +12,15 @@
       </template>
     </wzcSelect>
 
+    <h2>颜色选择器</h2>
+    <div>
+      <div class="buttonlist">
+        <wzc_color_picker :color.sync="color1">
+        </wzc_color_picker>
+        {{ color1 }}
+      </div>
+    </div>
+
     <h2>折叠面板</h2>
     <div>
       <div class="buttonlist">
@@ -155,6 +164,7 @@ import wzc_button from "./button/wzc-button";
 import wzc_switch from "./Switch/wzc-switch";
 import wzc_collapse from "./Collapse/wzc-collapse";
 import wzc_collapse_item from "./Collapse/wzc-collapse-item";
+import wzc_color_picker from "./ColorPicker/wzc-color-picker"
 export default {
   name: "HelloWorld",
   components: {
@@ -164,10 +174,12 @@ export default {
     wzc_switch,
     wzc_collapse,
     wzc_collapse_item,
+    wzc_color_picker,
   },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
+      color1:"rgb(0, 251, 255)",
       showlist: [
         {
           item_name: "选项0",
