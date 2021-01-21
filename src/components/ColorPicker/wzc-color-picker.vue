@@ -8,9 +8,15 @@
                     <div ></div>
                 </div>
             </div>
-            <div class="wzc_color_right">
-
+            <div class="wzc_color_right" >
+                <div class="wzc_hue_slider" @mousedown="thumbClick($event)"></div>
+                <div class="wzc_hue_slider_thumb" ref="wzcthumb"></div>
             </div>
+        </div>
+        <div class="wzc_color_btns">
+            <input type="text" class="wzc_input" v-model="currentColor">
+
+            <div class="wzc_color_show" :style="{ 'background-color': currentColor }"></div>
         </div>
     </div>
 </template>
@@ -34,10 +40,11 @@ export default {
     created() {},
     mounted() {
         this.dragColorPointer(this.$refs.wzcColorPointer);
+        this.dragColorPointer(this.$refs.wzcthumb, "thumb");
         this.backgroundColor = this.color;
+        this.currentColor = this.rgbToHex(this.color);
     },
-    watch: {
-    },
+    watch: {},
     computed: {
         styleVar() {
             return {
@@ -46,7 +53,7 @@ export default {
         }
     },
     methods: {
-        dragColorPointer (el) {
+        dragColorPointer (el, dom) {
             let dragBox = el; 
             dragBox.onmousedown = (e) => {
                 e = e || window.event;
@@ -59,9 +66,14 @@ export default {
                     if(left < 0)  { left = 0; }
                     if(top > 180) { top = 180; }
                     if(top < 0)   { top = 0; }
-                    dragBox.style.left = left + "px";
                     dragBox.style.top = top + "px";
-                    this.changeColor(left, top )
+                    if( dom == "thumb" ) {
+                        dragBox.style.left = "0px";
+                        this.changeThumbColor(top);
+                    } else {
+                        dragBox.style.left = left + "px";
+                        this.changeColor(left, top )
+                    }
                 };
                 document.onmouseup = e => {
                     document.onmousemove = null;
@@ -104,24 +116,44 @@ export default {
             }
             this.changeColor(parseInt(this.$refs.wzcColorPointer.style.left), parseInt(this.$refs.wzcColorPointer.style.top) )
         },
+        thumbClick (e) {
+            this.$refs.wzcthumb.style.top = e.offsetY + 'px';
+            this.changeThumbColor(e.offsetY);
+        },
         // 计算颜色  HSV方式计算rgb
         changeColor (left, top) {
             let saturation = Math.round(left / 280 * 100) / 100;
             let value = Math.round((1 - top / 180) * 100) / 100;
-            let hue = this.getHue(this.getRGB(""+this.color));
-            this.currentColor = this.HSVtoRGB(hue, saturation, value);
+            let hue = this.getHue(this.getRGB(""+this.backgroundColor));
+            this.currentColor = this.rgbToHex(this.HSVtoRGB(hue, saturation, value));
             this.$emit('update:color', this.currentColor);
+        },
+        changeThumbColor (top) {
+            let hue = Math.round((top / 180) * 360 * 100) / 100;
+            this.backgroundColor = this.HuetoRGB(hue)
         },
         getRGB (str){
             if(str.indexOf('rgb') == -1){
                 str = "rgba(" + str.match(/[A-Za-z0-9]{2}/g).map(function(v) { return parseInt(v, 16) }).join(",") + ")";
             } 
-            var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+            let match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
             return match ? {
                 red: match[1],
                 green: match[2],
                 blue: match[3]
             } : {};
+        },
+        rgbToHex (color){
+            if(color.indexOf("#") != -1) {
+                return color;
+            }
+            let arr = color.split(',');
+            let r = +arr[0].split('(')[1];
+            let g = +arr[1];
+            let b = +arr[2].split(')')[0];
+            let value = (1 << 24) + r * (1 << 16) + g * (1 << 8) + b;
+            value = value.toString(16);
+            return '#' + value.slice(1);
         },
         getHue (rgbArray) {
             let r, g, b, max, min;
@@ -170,6 +202,24 @@ export default {
                 case 5: r = v;  g = p1; b = p2; break;
             }
             return 'rgb(' + Math.round(r * 255) + ',' + Math.round(g * 255) + ',' + Math.round(b * 255) + ')';
+        },
+        // 根据色相计算纯色
+        HuetoRGB(h) {
+            let doHandle = (num) =>{
+                if( num > 255) {
+                    return 255;
+                } else if(num < 0){
+                    return 0;
+                } else {
+                    return Math.round(num);
+                }
+            }
+
+            let hueRGB = h/60 * 255;
+            let r = doHandle(Math.abs(hueRGB-765)-255);
+            let g = doHandle(510 - Math.abs(hueRGB-510));
+            let b = doHandle(510 - Math.abs(hueRGB-1020));
+            return 'rgb(' +r + ',' + g + ',' + b + ')';  
         }
     },
 };
@@ -189,7 +239,7 @@ export default {
         width: 100%;
         height: 180px;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
     .wzc_color_left {
         width: 280px;
@@ -201,6 +251,7 @@ export default {
     .wzc_color_right {
         width: 12px;
         height: 100%;
+        position: relative;
     }
     .wzc_color_left .white_panel,
     .wzc_color_left .black_panel{
@@ -227,5 +278,51 @@ export default {
         border-radius: 6px;
         box-shadow: rgb(255, 255, 255) 0px 0px 0px 1px inset;
         transform: translate(-6px, -6px);
+    }
+    .wzc_color_right .wzc_hue_slider {
+        height: 100%;
+        background: linear-gradient(180deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red);
+    }
+    .wzc_hue_slider_thumb {
+        position: absolute;
+        cursor: pointer;
+        box-sizing: border-box;
+        left: 0;
+        top: 0;
+        width: 12px;
+        height: 4px;
+        border-radius: 1px;
+        background: #fff;
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 0 2px rgba(0,0,0,.6);
+        z-index: 1;
+    }
+    .wzc_color_btns .wzc_input {
+        width: 155px;
+        height: 28px;
+        line-height: 28px;
+        background-color: #fff;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+        box-sizing: border-box;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        outline: none;
+        padding: 0 15px;
+        margin-left: 5px;
+    }
+    .wzc_color_show {
+        width: 28px;
+        height: 28px;
+        border-radius: 5px;
+        margin-left: 15px;
+    }
+    .wzc_color_btns {
+        width: 100%;
+        height: 28px;
+        margin-top: 10px;
+        display: flex;
     }
 </style>
