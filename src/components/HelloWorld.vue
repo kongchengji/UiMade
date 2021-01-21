@@ -179,7 +179,7 @@ export default {
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      color1:"rgb(0, 251, 255)",
+      color1:"#ffff00",
       showlist: [
         {
           item_name: "选项0",

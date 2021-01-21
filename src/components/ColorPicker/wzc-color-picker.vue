@@ -12,7 +12,6 @@
 
             </div>
         </div>
-        <!-- {{ this.$refs.wzcColorPointer.style.top }} -->
     </div>
 </template>
 
@@ -29,21 +28,20 @@ export default {
     data() {
         return {
             currentColor: "",
+            backgroundColor: "",
         };
     },
     created() {},
     mounted() {
         this.dragColorPointer(this.$refs.wzcColorPointer);
+        this.backgroundColor = this.color;
     },
     watch: {
-        'currentPointerLeft':(e)=>{
-            console.log(e)
-        }
     },
     computed: {
         styleVar() {
             return {
-                '--wzc-picker-color': this.color ,
+                '--wzc-picker-color': this.backgroundColor ,
             }
         }
     },
@@ -55,21 +53,18 @@ export default {
                 let disX = e.clientX - dragBox.offsetLeft;
                 let disY = e.clientY - dragBox.offsetTop;
                 document.onmousemove = e => {
-                    //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
                     let left = e.clientX - disX;
                     let top = e.clientY - disY;
-                    //移动当前元素
                     if(left > 280){ left = 280; }
                     if(left < 0)  { left = 0; }
                     if(top > 180) { top = 180; }
                     if(top < 0)   { top = 0; }
                     dragBox.style.left = left + "px";
                     dragBox.style.top = top + "px";
+                    this.changeColor(left, top )
                 };
                 document.onmouseup = e => {
-                    //鼠标弹起来的时候不再移动
                     document.onmousemove = null;
-                    //预防鼠标弹起来后还会循环（即预防鼠标放上去的时候还会移动）
                     document.onmouseup = null;
                 };
             }
@@ -107,6 +102,74 @@ export default {
                     }
                 }
             }
+            this.changeColor(parseInt(this.$refs.wzcColorPointer.style.left), parseInt(this.$refs.wzcColorPointer.style.top) )
+        },
+        // 计算颜色  HSV方式计算rgb
+        changeColor (left, top) {
+            let saturation = Math.round(left / 280 * 100) / 100;
+            let value = Math.round((1 - top / 180) * 100) / 100;
+            let hue = this.getHue(this.getRGB(""+this.color));
+            this.currentColor = this.HSVtoRGB(hue, saturation, value);
+            this.$emit('update:color', this.currentColor);
+        },
+        getRGB (str){
+            if(str.indexOf('rgb') == -1){
+                str = "rgba(" + str.match(/[A-Za-z0-9]{2}/g).map(function(v) { return parseInt(v, 16) }).join(",") + ")";
+            } 
+            var match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+            return match ? {
+                red: match[1],
+                green: match[2],
+                blue: match[3]
+            } : {};
+        },
+        getHue (rgbArray) {
+            let r, g, b, max, min;
+            for(let i = 0; i < 3; i++){
+                r = parseInt(rgbArray.red);
+                g = parseInt(rgbArray.green);
+                b = parseInt(rgbArray.blue);
+            }
+            max = Math.max(r, g, b)
+            min = Math.min(r, g, b)
+            if(max == min) {
+                return 0;
+            } else {
+                if( max == r && g >= b) {
+                    return 60 * (g - b)/(max - min);
+                } else if ( max == r && g < b) {
+                    return 60 * (g - b)/(max - min) + 360;
+                } else if (max == g) {
+                    return 60 * (b - r)/(max - min) + 120;
+                } else if (max == b) {
+                    return 60 * (r - g)/(max - min) + 240;
+                }  
+            }
+        },
+        HSVtoRGB(h, s, v) {
+            let i, f, p1, p2, p3;
+            let r = 0, g = 0, b = 0;
+            if (s < 0) s = 0;
+            if (s > 1) s = 1;
+            if (v < 0) v = 0;
+            if (v > 1) v = 1;
+            h %= 360;
+            if (h < 0) h += 360;
+            h /= 60;
+            i = Math.floor(h);
+            f = h - i;
+            p1 = v * (1 - s);
+            p2 = v * (1 - s * f);
+            p3 = v * (1 - s * (1 - f));
+            switch(i) {
+                case 0: r = v;  g = p3; b = p1; break;
+                case 1: r = p2; g = v;  b = p1; break;
+                case 2: r = p1; g = v;  b = p3; break;
+                case 3: r = p1; g = p2; b = v;  break;
+                case 4: r = p3; g = p1; b = v;  break;
+                case 5: r = v;  g = p1; b = p2; break;
+            }
+            return 'rgb(' + Math.round(r * 255) + ',' + Math.round(g * 255) + ',' + Math.round(b * 255) + ')';
         }
     },
 };
