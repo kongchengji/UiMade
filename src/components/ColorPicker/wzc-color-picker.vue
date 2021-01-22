@@ -44,7 +44,11 @@ export default {
         this.backgroundColor = this.color;
         this.currentColor = this.rgbToHex(this.color);
     },
-    watch: {},
+    watch: {
+        'currentColor':function(str){
+            this.RGBtoHSV(str);
+        }
+    },
     computed: {
         styleVar() {
             return {
@@ -155,6 +159,7 @@ export default {
             value = value.toString(16);
             return '#' + value.slice(1);
         },
+        // rgb to Hue
         getHue (rgbArray) {
             let r, g, b, max, min;
             for(let i = 0; i < 3; i++){
@@ -220,7 +225,10 @@ export default {
             let g = doHandle(510 - Math.abs(hueRGB-510));
             let b = doHandle(510 - Math.abs(hueRGB-1020));
             return 'rgb(' +r + ',' + g + ',' + b + ')';  
-        }
+        },
+        RGBtoHSV(rgb) {
+            console.log(this.getHue(this.getRGB(rgb)))
+        },
     },
 };
 </script>
