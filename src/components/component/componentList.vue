@@ -45,6 +45,18 @@
                         href: '#/compentList/button',
                     },
                     {
+                        title: 'C',
+                        type: '4',
+                        id: 'headline_C',
+                        href: '#/compentList',
+                    },
+                    {
+                        title: 'ColorPicker 颜色选择器',
+                        type: '2',
+                        id: 'Button',
+                        href: '#/compentList/colorpicker',
+                    },
+                    {
                         title: 'S',
                         type: '4',
                         id: 'headline_S',

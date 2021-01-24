@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="wzc_color_btns">
-            <input type="text" class="wzc_input" v-model="currentColor">
+            <input type="text" class="wzc_input" v-model="currentColor" @input="inputHex">
 
             <div class="wzc_color_show" :style="{ 'background-color': currentColor }"></div>
         </div>
@@ -43,11 +43,10 @@ export default {
         this.dragColorPointer(this.$refs.wzcthumb, "thumb");
         this.backgroundColor = this.color;
         this.currentColor = this.rgbToHex(this.color);
+        this.$refs.wzcColorPointer.style.left = '280px';
+        this.$refs.wzcColorPointer.style.top = '0px';
     },
     watch: {
-        'currentColor':function(str){
-            this.RGBtoHSV(str);
-        }
     },
     computed: {
         styleVar() {
@@ -134,11 +133,13 @@ export default {
         },
         changeThumbColor (top) {
             let hue = Math.round((top / 180) * 360 * 100) / 100;
-            this.backgroundColor = this.HuetoRGB(hue)
+            this.backgroundColor = this.HuetoRGB(hue);
+            this.changeColor(parseInt(this.$refs.wzcColorPointer.style.left), parseInt(this.$refs.wzcColorPointer.style.top) )
         },
         getRGB (str){
-            if(str.indexOf('rgb') == -1){
-                str = "rgba(" + str.match(/[A-Za-z0-9]{2}/g).map(function(v) { return parseInt(v, 16) }).join(",") + ")";
+            if(str.indexOf('rgb') == -1 && str.indexOf('#') > -1){
+                // str = "rgba(" + str.match(/[A-Za-z0-9]{2}/g).map(function(v) { return parseInt(v, 16) }).join(",") + ")";
+                str = this.HexTorgb( str );
             } 
             let match = str.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
             return match ? {
@@ -147,6 +148,7 @@ export default {
                 blue: match[3]
             } : {};
         },
+        // Hex(16进制颜色值) and RGB  
         rgbToHex (color){
             if(color.indexOf("#") != -1) {
                 return color;
@@ -159,7 +161,48 @@ export default {
             value = value.toString(16);
             return '#' + value.slice(1);
         },
-        // rgb to Hue
+        HexTorgb (hex){
+            var hexNum = hex.substring(1);
+            hexNum = '0x' + (hexNum.length < 6 ? repeatLetter(hexNum, 2) : hexNum);
+            var r = hexNum >> 16;
+            var g = hexNum >> 8 & '0xff';
+            var b = hexNum & '0xff';
+            return `rgb(${r},${g},${b})`;
+            
+            function repeatWord(word, num){
+                var result = '';
+                for(let i = 0; i < num; i ++){
+                    result += word;
+                }
+                return result;
+            }
+            function repeatLetter(word, num){
+                var result = '';
+                for(let letter of word){
+                    result += repeatWord(letter, num);
+                }
+                return result;
+            }
+        },
+        // 根据Hue色相计算rgb纯色
+        HuetoRGB(h) {
+            let doHandle = (num) =>{
+                if( num > 255) {
+                    return 255;
+                } else if(num < 0){
+                    return 0;
+                } else {
+                    return Math.round(num);
+                }
+            }
+
+            let hueRGB = h/60 * 255;
+            let r = doHandle(Math.abs(hueRGB-765)-255);
+            let g = doHandle(510 - Math.abs(hueRGB-510));
+            let b = doHandle(510 - Math.abs(hueRGB-1020));
+            return 'rgb(' +r + ',' + g + ',' + b + ')';  
+        },
+        // rgb to Hue(色相)
         getHue (rgbArray) {
             let r, g, b, max, min;
             for(let i = 0; i < 3; i++){
@@ -182,6 +225,42 @@ export default {
                     return 60 * (r - g)/(max - min) + 240;
                 }  
             }
+        },
+        // HSV(色相、饱和度、亮度) and RGB
+        RGBtoHSV(rgb) {
+            rgb = this.getRGB(rgb)
+            var rr, gg, bb,
+            r = parseInt(rgb.red) / 255,
+            g = parseInt(rgb.green) / 255,
+            b = parseInt(rgb.blue) / 255,
+            h, s,
+            v = Math.max(r, g, b),
+            diff = v - Math.min(r, g, b),
+            diffc = function(c){
+                return (v - c) / 6 / diff + 1 / 2;
+            };
+            if (diff == 0) {
+                h = s = 0;
+            } else {
+                s = diff / v;  rr = diffc(r); gg = diffc(g); bb = diffc(b);
+                if (r === v) {
+                    h = bb - gg;
+                }else if (g === v) {
+                    h = (1 / 3) + rr - bb;
+                }else if (b === v) {
+                    h = (2 / 3) + gg - rr;
+                }
+                if (h < 0) {
+                    h += 1;
+                }else if (h > 1) {
+                    h -= 1;
+                }
+            }
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                v: Math.round(v * 100)
+            };
         },
         HSVtoRGB(h, s, v) {
             let i, f, p1, p2, p3;
@@ -208,27 +287,31 @@ export default {
             }
             return 'rgb(' + Math.round(r * 255) + ',' + Math.round(g * 255) + ',' + Math.round(b * 255) + ')';
         },
-        // 根据色相计算纯色
-        HuetoRGB(h) {
-            let doHandle = (num) =>{
-                if( num > 255) {
-                    return 255;
-                } else if(num < 0){
-                    return 0;
+        // 根据HSV计算位置
+        HSVtoPos (hsv) {
+            let left = hsv.s / 100 * 280;
+            let top = 180 - ( hsv.v / 100 * 180 );
+            this.$refs.wzcColorPointer.style.left = Math.round(left) + 'px';
+            this.$refs.wzcColorPointer.style.top = Math.round(top) + 'px';
+        },
+        inputHex (item){
+            let str = item.target.value;
+            if( str.length < 4 ) return ;
+            if( this.getHue(this.getRGB(str)) == undefined || this.getHue(this.getRGB(str)) > 360 || this.getHue(this.getRGB(str)) < 0 ) {
+                return ;
+            } else {
+                let hsv = this.RGBtoHSV(str);
+                let backgroundHue = this.getHue(this.getRGB(this.backgroundColor));
+                if (hsv.h == backgroundHue) {
+                    this.HSVtoPos(hsv);
                 } else {
-                    return Math.round(num);
+                    this.backgroundColor = str;
+                    this.$refs.wzcColorPointer.style.left = '280px';
+                    this.$refs.wzcColorPointer.style.top = '0px';
                 }
             }
-
-            let hueRGB = h/60 * 255;
-            let r = doHandle(Math.abs(hueRGB-765)-255);
-            let g = doHandle(510 - Math.abs(hueRGB-510));
-            let b = doHandle(510 - Math.abs(hueRGB-1020));
-            return 'rgb(' +r + ',' + g + ',' + b + ')';  
-        },
-        RGBtoHSV(rgb) {
-            console.log(this.getHue(this.getRGB(rgb)))
-        },
+            this.$emit('update:color', this.currentColor);
+        }
     },
 };
 </script>

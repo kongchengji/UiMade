@@ -15,9 +15,10 @@
     <h2>颜色选择器</h2>
     <div>
       <div class="buttonlist">
+        <div class="color_picker_dom">父组件接收到选择的颜色：<div :style="{ 'background-color': color1 }"> {{ color1 }} </div> </div>
         <wzc_color_picker :color.sync="color1">
         </wzc_color_picker>
-        {{ color1 }}
+        
       </div>
     </div>
 
@@ -261,5 +262,16 @@ h2 {
 }
 .wzc_switch {
   margin: 5px 30px;
+}
+.color_picker_dom {
+  width: 280px;
+  display: flex;
+}
+.color_picker_dom>div {
+  height: 24px;
+  line-height: 24px;
+}
+.wzc_color_picker {
+  margin: 0 30px;
 }
 </style>

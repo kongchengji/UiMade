@@ -21,3 +21,5 @@
 | active-color | switch结束颜色 | String | #dcdfe6 | |
 | width | switch宽度 | Number | 45 | |
 | disabled | 禁止使用 | Boolean | false | |
+
+<br/>
