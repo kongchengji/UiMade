@@ -12,6 +12,16 @@
       </template>
     </wzcSelect>
 
+    <h2>slider 滑块</h2>
+    <div>
+      <div class="buttonlist">
+        <wzc_slider :value.sync="sliderValue"></wzc_slider>
+      </div>
+      <div class="buttonlist">
+        <wzc_slider :value.sync="sliderValue" :backgroundcolor="'#13ce66'"></wzc_slider>
+      </div>
+    </div>
+
     <h2>颜色选择器</h2>
     <div>
       <div class="buttonlist">
@@ -163,6 +173,7 @@ import wzcSelect from "./select/wzc-select";
 import wzc_option from "./select/wzc-option";
 import wzc_button from "./button/wzc-button";
 import wzc_switch from "./Switch/wzc-switch";
+import wzc_slider from "./Slider/wzc-slider";
 import wzc_collapse from "./Collapse/wzc-collapse";
 import wzc_collapse_item from "./Collapse/wzc-collapse-item";
 import wzc_color_picker from "./ColorPicker/wzc-color-picker"
@@ -176,11 +187,13 @@ export default {
     wzc_collapse,
     wzc_collapse_item,
     wzc_color_picker,
+    wzc_slider,
   },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
       color1:"#ffff00",
+      sliderValue: 30,
       showlist: [
         {
           item_name: "选项0",
