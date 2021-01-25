@@ -69,6 +69,12 @@
                         href: '#/compentList/select',
                     },
                     {
+                        title: 'Slider 滑块',
+                        type: '2',
+                        id: 'sliderBox',
+                        href: '#/compentList/slider',
+                    },
+                    {
                         title: 'Switch 开关',
                         type: '2',
                         id: 'switch',

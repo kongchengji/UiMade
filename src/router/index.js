@@ -34,6 +34,7 @@ export default new Router({
         { path: '/compentList/button', component: r => require.ensure([], () => r(require('../components/button/wzc-button.md'))) },
         { path: '/compentList/select', component: r => require.ensure([], () => r(require('../components/select/wzc-select.md'))) },
         { path: '/compentList/switch', component: r => require.ensure([], () => r(require('../components/Switch/wzc-switch.md'))) },
+        { path: '/compentList/slider', component: r => require.ensure([], () => r(require('../components/Slider/wzc-slider.md'))) },
         { path: '/compentList/colorpicker', component: r => require.ensure([], () => r(require('../components/ColorPicker/wzc-color-picker.md'))) }
       ]
     },

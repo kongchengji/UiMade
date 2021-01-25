@@ -2,7 +2,8 @@
 
 可以点击选择状态,进行切换
 
-```
+### 使用代码
+```html
 // 使用方式  isMove1：Boolean
 <wzc_switch :value.sync="isMove1" > </wzc_switch>
 <wzc_switch

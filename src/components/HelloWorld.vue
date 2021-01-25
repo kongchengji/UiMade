@@ -1,6 +1,11 @@
 <template>
   <div class="hello">
-    <h2>选择器组件</h2>
+    <h2>TimeLine 时间线</h2>
+    <div class="buttonlist">
+      <wzc_timeline></wzc_timeline>
+    </div>
+
+    <h2>Select 选择器</h2>
     <wzcSelect :width="240" :height="50">
       <template v-slot:wzc_option>
         <wzc_option
@@ -13,12 +18,24 @@
     </wzcSelect>
 
     <h2>slider 滑块</h2>
-    <div>
+    <div class="sliders">
       <div class="buttonlist">
-        <wzc_slider :value.sync="sliderValue"></wzc_slider>
+        <div class="sliders_text">基础使用</div>  <wzc_slider :value.sync="sliderValue"></wzc_slider>
       </div>
       <div class="buttonlist">
-        <wzc_slider :value.sync="sliderValue" :backgroundcolor="'#13ce66'"></wzc_slider>
+        <div class="sliders_text">设置颜色</div>  <wzc_slider :value.sync="sliderValue" :backgroundcolor="'#13ce66'"></wzc_slider>
+      </div>
+      <div class="buttonlist">
+        <div class="sliders_text">设置显示步长为10</div>  <wzc_slider :value.sync="sliderValue2" :backgroundcolor="'#1f5ae0'" :step="10" ></wzc_slider>
+      </div>
+      <div class="buttonlist">
+        <div class="sliders_text">设置显示间隔点</div> <wzc_slider :value.sync="sliderValue2" :backgroundcolor="'#cc00ff'" :step="10" show-stop ></wzc_slider>
+      </div>
+      <div class="buttonlist">
+        <div class="sliders_text">设置为禁用</div> <wzc_slider :value.sync="sliderValue3" disabled ></wzc_slider>
+      </div>
+      <div class="buttonlist">
+        <div class="sliders_text">设置宽度为800px</div>  <wzc_slider :value.sync="sliderValue" :backgroundcolor="'#eded11'" :width="800"></wzc_slider>
       </div>
     </div>
 
@@ -176,7 +193,8 @@ import wzc_switch from "./Switch/wzc-switch";
 import wzc_slider from "./Slider/wzc-slider";
 import wzc_collapse from "./Collapse/wzc-collapse";
 import wzc_collapse_item from "./Collapse/wzc-collapse-item";
-import wzc_color_picker from "./ColorPicker/wzc-color-picker"
+import wzc_color_picker from "./ColorPicker/wzc-color-picker";
+import wzc_timeline from "./TimeLine/wzc-timeline";
 export default {
   name: "HelloWorld",
   components: {
@@ -188,12 +206,15 @@ export default {
     wzc_collapse_item,
     wzc_color_picker,
     wzc_slider,
+    wzc_timeline,
   },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
       color1:"#ffff00",
       sliderValue: 30,
+      sliderValue2: 20,
+      sliderValue3: 42,
       showlist: [
         {
           item_name: "选项0",
@@ -286,5 +307,14 @@ h2 {
 }
 .wzc_color_picker {
   margin: 0 30px;
+}
+.sliders .buttonlist {
+  line-height: 40px;
+}
+.wzc_slider {
+  margin: 0 30px;
+}
+.sliders_text {
+  width: 200px;
 }
 </style>
