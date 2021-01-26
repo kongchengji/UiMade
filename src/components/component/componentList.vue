@@ -79,7 +79,19 @@
                         type: '2',
                         id: 'switch',
                         href: '#/compentList/switch',
-                    }
+                    },
+                    {
+                        title: 'S',
+                        type: '4',
+                        id: 'headline_S',
+                        href: '#/compentList',
+                    },
+                    {
+                        title: 'TimeLine 时间轴',
+                        type: '2',
+                        id: 'timeline',
+                        href: '#/compentList/timeline',
+                    },
                 ]
             };
         },
