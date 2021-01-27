@@ -1,16 +1,62 @@
 <template>
   <div class="hello">
+    <h2>DividingLine 分割线</h2>
+    <div class="buttonlist" style="display: block">
+      <div class="fenge">基础分割线</div>
+      <wzc_dividingline></wzc_dividingline>
+      <div class="fenge">分割线宽高调整 宽度800，高15, 颜色设置为#FF0000</div>
+      <wzc_dividingline :width="800" :height="15" color="#FF0000">
+        <template v-slot:wzc_divide_title>
+          <i class="fa fa-bed"></i>
+        </template>
+      </wzc_dividingline>
+      <div class="fenge">分割线上设置内容和位置</div>
+      <wzc_dividingline>
+        <template v-slot:wzc_divide_title>
+          <div>空城机的组件</div>
+        </template>
+      </wzc_dividingline>
+      <wzc_dividingline title-position="center" color="#0000FF">
+        <template v-slot:wzc_divide_title>
+          <i class="fa fa-check-square"></i>
+        </template>
+      </wzc_dividingline>
+      <wzc_dividingline title-position="right">
+        <template v-slot:wzc_divide_title>
+          <div>空城机<i class="fa fa-eye-slash"></i></div>
+        </template>
+      </wzc_dividingline>
+      <div class="fenge">分割线垂直</div>
+      <div class="buttonlist">
+        <wzc_dividingline title-position="center" vertical :height="100">
+          <template v-slot:wzc_divide_title>
+            <i class="fa fa-check-square"></i>
+          </template>
+        </wzc_dividingline>
+        <wzc_dividingline title-position="top" vertical :height="100">
+          <template v-slot:wzc_divide_title>
+            <i class="fa fa-check-square"></i>
+          </template>
+        </wzc_dividingline>
+        <wzc_dividingline title-position="bottom" vertical :height="100">
+          <template v-slot:wzc_divide_title>
+            <i class="fa fa-check-square"></i>
+          </template>
+        </wzc_dividingline>
+      </div>
+    </div>
+
     <h2>TimeLine 时间线</h2>
     <div class="buttonlist">
       <wzc_timeline>
         <wzc_timeline_option
-          v-for = "(item, index) in activities"
-          :key = "index"
-          :timestamp = "item.timestamp"
-          :size = "item.size"
-          :icon = "item.icon"
+          v-for="(item, index) in activities"
+          :key="index"
+          :timestamp="item.timestamp"
+          :size="item.size"
+          :icon="item.icon"
         >
-          <div v-html='item.content'></div>
+          <div v-html="item.content"></div>
         </wzc_timeline_option>
       </wzc_timeline>
     </div>
@@ -30,32 +76,55 @@
     <h2>slider 滑块</h2>
     <div class="sliders">
       <div class="buttonlist">
-        <div class="sliders_text">基础使用value = {{ sliderValue }}</div>  <wzc_slider :value.sync="sliderValue"></wzc_slider>
+        <div class="sliders_text">基础使用value = {{ sliderValue }}</div>
+        <wzc_slider :value.sync="sliderValue"></wzc_slider>
       </div>
       <div class="buttonlist">
-        <div class="sliders_text">设置颜色</div>  <wzc_slider :value.sync="sliderValue" :backgroundcolor="'#13ce66'"></wzc_slider>
+        <div class="sliders_text">设置颜色</div>
+        <wzc_slider
+          :value.sync="sliderValue"
+          :backgroundcolor="'#13ce66'"
+        ></wzc_slider>
       </div>
       <div class="buttonlist">
-        <div class="sliders_text">设置显示步长为10</div>  <wzc_slider :value.sync="sliderValue2" :backgroundcolor="'#1f5ae0'" :step="10" ></wzc_slider>
+        <div class="sliders_text">设置显示步长为10</div>
+        <wzc_slider
+          :value.sync="sliderValue2"
+          :backgroundcolor="'#1f5ae0'"
+          :step="10"
+        ></wzc_slider>
       </div>
       <div class="buttonlist">
-        <div class="sliders_text">设置显示间隔点</div> <wzc_slider :value.sync="sliderValue2" :backgroundcolor="'#cc00ff'" :step="10" show-stop ></wzc_slider>
+        <div class="sliders_text">设置显示间隔点</div>
+        <wzc_slider
+          :value.sync="sliderValue2"
+          :backgroundcolor="'#cc00ff'"
+          :step="10"
+          show-stop
+        ></wzc_slider>
       </div>
       <div class="buttonlist">
-        <div class="sliders_text">设置为禁用</div> <wzc_slider :value.sync="sliderValue3" disabled ></wzc_slider>
+        <div class="sliders_text">设置为禁用</div>
+        <wzc_slider :value.sync="sliderValue3" disabled></wzc_slider>
       </div>
       <div class="buttonlist">
-        <div class="sliders_text">设置宽度为800px</div>  <wzc_slider :value.sync="sliderValue" :backgroundcolor="'#eded11'" :width="800"></wzc_slider>
+        <div class="sliders_text">设置宽度为800px</div>
+        <wzc_slider
+          :value.sync="sliderValue"
+          :backgroundcolor="'#eded11'"
+          :width="800"
+        ></wzc_slider>
       </div>
     </div>
 
     <h2>颜色选择器</h2>
     <div>
       <div class="buttonlist">
-        <div class="color_picker_dom">父组件接收到选择的颜色：<div :style="{ 'background-color': color1 }"> {{ color1 }} </div> </div>
-        <wzc_color_picker :color.sync="color1">
-        </wzc_color_picker>
-        
+        <div class="color_picker_dom">
+          父组件接收到选择的颜色：
+          <div :style="{ 'background-color': color1 }">{{ color1 }}</div>
+        </div>
+        <wzc_color_picker :color.sync="color1"> </wzc_color_picker>
       </div>
     </div>
 
@@ -72,8 +141,7 @@
     <div>
       <div class="buttonlist">
         <h3>正常调用</h3>
-        <wzc_switch :value.sync="isMove1" >
-        </wzc_switch>
+        <wzc_switch :value.sync="isMove1"> </wzc_switch>
         <wzc_switch
           active-color="#13ce66"
           inactive-color="#ff4949"
@@ -205,7 +273,9 @@ import wzc_collapse from "./Collapse/wzc-collapse";
 import wzc_collapse_item from "./Collapse/wzc-collapse-item";
 import wzc_color_picker from "./ColorPicker/wzc-color-picker";
 import wzc_timeline from "./TimeLine/wzc-timeline";
-import wzc_timeline_option from "./TimeLine/wzc_timeline_option"
+import wzc_timeline_option from "./TimeLine/wzc-timeline-option";
+import wzc_dividingline from "./DividingLine/wzc-dividingline";
+
 export default {
   name: "HelloWorld",
   components: {
@@ -219,11 +289,12 @@ export default {
     wzc_slider,
     wzc_timeline,
     wzc_timeline_option,
+    wzc_dividingline,
   },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      color1:"#ffff00",
+      color1: "#ffff00",
       sliderValue: 30,
       sliderValue2: 20,
       sliderValue3: 42,
@@ -260,9 +331,9 @@ export default {
             开始编写组件的工作，时间轴路线发动
             <br>不学了，真香
           </p>`,
-          timestamp: '2018-04-12 20:46',
-          size: '18px',
-          icon: ''
+          timestamp: "2018-04-12 20:46",
+          size: "18px",
+          icon: "",
         },
         {
           content: `
@@ -273,9 +344,9 @@ export default {
             <li>故常无欲，以观其妙，常有欲，以观其徼</li>
             <li>此两者，同出而异名，同谓之玄，玄之又玄，众妙之门</li>
           </ul>`,
-          timestamp: '8月16日',
-          size: '14px',
-          icon: 'fa-grav'
+          timestamp: "8月16日",
+          size: "14px",
+          icon: "fa-grav",
         },
         {
           content: `
@@ -284,11 +355,11 @@ export default {
           <p>又东三百里，曰堂庭之山。多棪木，多白猿，多水玉，多黄金。 </p>
           <p>又东三百八十里，曰猨翼之山，其中多怪兽，水多怪鱼。多白玉，多蝮虫，多怪蛇，多怪木，不可以上。 </p>
           <p>又东三百七十里，曰杻阳之山，其阳多赤金，其阴多白金。有兽焉，其状如马而白首，其文如虎而赤尾，其音如谣，其名曰鹿蜀，佩之宜子孙。怪水出焉，而东流注于宪翼之水。其中多玄龟，其状如龟而鸟首虺尾，其名曰旋龟，其音如判木，佩之不聋，可以为底。</p>`,
-          timestamp: '2020年9月21日',
-          size: '14px',
-          icon: 'fa-free-code-camp'
-        }
-      ]
+          timestamp: "2020年9月21日",
+          size: "14px",
+          icon: "fa-free-code-camp",
+        },
+      ],
     };
   },
   mounted() {
@@ -332,12 +403,14 @@ export default {
 }
 h3,
 h2 {
-  margin-left: calc(50% - 550px);
+  margin:0 auto;
+  width: 1100px;
 }
 .buttonlist {
   margin: 30px auto;
   width: 1100px;
   display: flex;
+  flex-wrap: wrap;
 }
 .buttonlist .wzc_button {
   margin: 0 20px;
@@ -349,7 +422,7 @@ h2 {
   width: 280px;
   display: flex;
 }
-.color_picker_dom>div {
+.color_picker_dom > div {
   height: 24px;
   line-height: 24px;
 }
@@ -364,5 +437,10 @@ h2 {
 }
 .sliders_text {
   width: 200px;
+}
+.fenge {
+  margin: 15px 0px;
+  width: 100%;
+  background-color: blanchedalmond;
 }
 </style>

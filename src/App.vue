@@ -33,7 +33,7 @@
   /*修改滚动条样式*/
 div::-webkit-scrollbar{
   width: 8px;
-  height:10px;
+  height:6px;
 }
 div::-webkit-scrollbar-track{
   background: #fff;
@@ -60,6 +60,12 @@ div::-webkit-scrollbar-corner{
   background-color: #fff;
   width: 100%;
   height: 100vh;
+}
+
+@media screen  and (max-width: 1200px)  {
+  #app { 
+    overflow: auto;
+  }
 }
 
 </style>
