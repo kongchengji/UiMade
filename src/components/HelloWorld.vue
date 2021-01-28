@@ -1,5 +1,19 @@
 <template>
   <div class="hello">
+    <h2> Collapse 折叠面板 </h2>
+    <div class="buttonlist">
+      <wzc_collapse>
+        <wzc_collapse_item title="杜甫">
+          <div style="font-size:14px;">杜甫的思想核心是儒家的仁政思想，他有“致君尧舜上，再使风俗淳”的宏伟抱负。杜甫虽然在世时名声并不显赫，但后来声名远播，对中国文学和日本文学都产生了深远的影响。杜甫共有约1500首诗歌被保留了下来，大多集于《杜工部集》。</div>
+        </wzc_collapse_item>
+      </wzc_collapse>
+      <wzc_collapse>
+        <wzc_collapse_item title="鲁迅">
+          <div style="font-size:14px;">鲁迅一生在文学创作、文学批评、思想研究、文学史研究、翻译、美术理论引进、基础科学介绍和古籍校勘与研究等多个领域具有重大贡献。他对于五四运动以后的中国社会思想文化发展具有重大影响，蜚声世界文坛，尤其在韩国、日本思想文化领域有极其重要的地位和影响，被誉为“二十世纪东亚文化地图上占最大领土的作家”。</div>
+        </wzc_collapse_item>
+      </wzc_collapse>
+    </div>
+
     <h2>DividingLine 分割线</h2>
     <div class="buttonlist" style="display: block">
       <div class="fenge">基础分割线</div>
@@ -47,6 +61,8 @@
           <template v-slot:wzc_divide_title>
             空城机
           </template>
+        </wzc_dividingline>
+        <wzc_dividingline  vertical :height="100">
         </wzc_dividingline>
       </div>
     </div>
@@ -133,19 +149,10 @@
       </div>
     </div>
 
-    <h2>折叠面板</h2>
-    <div>
-      <div class="buttonlist">
-        <wzc_collapse>
-          <wzc_collapse_item></wzc_collapse_item>
-        </wzc_collapse>
-      </div>
-    </div>
-
     <h2>switch开关</h2>
     <div>
       <div class="buttonlist">
-        <h3>正常调用</h3>
+        <h4>正常调用</h4>
         <wzc_switch :value.sync="isMove1"> </wzc_switch>
         <wzc_switch
           active-color="#13ce66"
@@ -155,7 +162,7 @@
         </wzc_switch>
       </div>
       <div class="buttonlist">
-        <h3>禁止调用</h3>
+        <h4>禁止调用</h4>
         <wzc_switch
           ctive-color="#13ce66"
           inactive-color="#ff4949"
@@ -173,7 +180,7 @@
 
     <h2>按钮组件</h2>
     <div>
-      <h3>基础用法</h3>
+      <h4>基础用法</h4>
       <div class="buttonlist">
         <wzc_button @click.native="buttonAlert"> 默认按钮 </wzc_button>
         <wzc_button type="primary" @click.native="buttonAlert">
@@ -226,7 +233,7 @@
           <i class="fa fa-file-archive-o"></i>
         </wzc_button>
       </div>
-      <h3>加载按钮</h3>
+      <h4>加载按钮</h4>
       <div class="buttonlist">
         <wzc_button type="primary" :loading="isload" @click.native="reload">
           主要按钮
@@ -236,7 +243,7 @@
         </wzc_button>
         <wzc_button type="warning" :loading="true"> 加载按钮 </wzc_button>
       </div>
-      <h3>禁用按钮</h3>
+      <h4>禁用按钮</h4>
       <div class="buttonlist">
         <wzc_button disabled> 默认按钮 </wzc_button>
         <wzc_button disabled type="primary"> 主要按钮 </wzc_button>
@@ -253,7 +260,7 @@
         <wzc_button disabled plain type="warning"> 警告按钮 </wzc_button>
         <wzc_button disabled plain type="danger"> 危险按钮 </wzc_button>
       </div>
-      <h3>图标按钮</h3>
+      <h4>图标按钮</h4>
       <div class="buttonlist">
         <wzc_button><i class="fa fa-cubes"></i>文件</wzc_button>
         <wzc_button type="primary"> 眼睛<i class="fa fa-eye"></i> </wzc_button>
@@ -406,7 +413,7 @@ export default {
 .wzc_select {
   margin: 30px auto;
 }
-h3,
+h4,
 h2 {
   margin:0 auto;
   width: 1100px;

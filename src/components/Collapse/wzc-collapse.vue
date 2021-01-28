@@ -1,5 +1,5 @@
 <template>
-    <div class="wzc_collapse">
+    <div class="wzc_collapse" :style="styleVar">
         <slot></slot>
     </div>
 </template>
@@ -8,7 +8,12 @@
 export default {
     name:"wzc_collapse",
     components: {},
-    props: {},
+    props: {
+        width: {
+            type: String,
+            default: '100%'
+        }
+    },
     data() {
         return {
         };
@@ -16,10 +21,18 @@ export default {
     created() {},
     mounted() {},
     watch: {},
-    computed: {},
+    computed: {
+        styleVar() {
+                return {
+                    '--wzc-collapse-width': this.width ,
+                }
+            }
+    },
     methods: {},
 };
 </script>
 <style scoped>
-
+   .wzc_collapse {
+       width: var(--wzc-collapse-width);
+   }
 </style>

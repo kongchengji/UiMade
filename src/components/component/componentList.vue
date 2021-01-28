@@ -53,8 +53,20 @@
                     {
                         title: 'ColorPicker 颜色选择器',
                         type: '2',
-                        id: 'Button',
+                        id: 'ColorPicker',
                         href: '#/compentList/colorpicker',
+                    },
+                    {
+                        title: 'D',
+                        type: '4',
+                        id: 'headline_D',
+                        href: '#/compentList',
+                    },
+                    {
+                        title: 'DividingLine 分割线',
+                        type: '2',
+                        id: 'DividingLine',
+                        href: '#/compentList/dividingline',
                     },
                     {
                         title: 'S',
