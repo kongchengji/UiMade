@@ -43,6 +43,11 @@
             <i class="fa fa-check-square"></i>
           </template>
         </wzc_dividingline>
+        <wzc_dividingline title-position="center" vertical :height="100">
+          <template v-slot:wzc_divide_title>
+            空城机
+          </template>
+        </wzc_dividingline>
       </div>
     </div>
 
