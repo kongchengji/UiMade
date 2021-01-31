@@ -18,6 +18,10 @@ export default {
         isShow : {
             type: Boolean,
             default: false,
+        },
+        name : {
+            type: String,
+            default: ''
         }
     },
     data() {
@@ -29,11 +33,16 @@ export default {
     mounted() {
         this.currentIsShow = this.isShow ;
     },
-    watch: {},
+    watch: {
+        'currentIsShow': function(flag) {
+            
+        }
+    },
     computed: {},
     methods: {
         titleClick () {
-            this.currentIsShow = !this.currentIsShow
+            this.currentIsShow = !this.currentIsShow;
+            this.$parent.sonVueClick({ name: this.name, flag: this.currentIsShow})
         }
     },
 };

@@ -57,6 +57,12 @@
                         href: '#/compentList/colorpicker',
                     },
                     {
+                        title: 'Collapse 折叠面板',
+                        type: '2',
+                        id: 'Collapse',
+                        href: '#/compentList/collapse',
+                    },
+                    {
                         title: 'D',
                         type: '4',
                         id: 'headline_D',
@@ -67,6 +73,18 @@
                         type: '2',
                         id: 'DividingLine',
                         href: '#/compentList/dividingline',
+                    },
+                    {
+                        title: 'P',
+                        type: '4',
+                        id: 'headline_P',
+                        href: '#/compentList',
+                    },
+                    {
+                        title: 'PicView 图片显示器',
+                        type: '2',
+                        id: 'PicView',
+                        href: '#/compentList/picview',
                     },
                     {
                         title: 'S',
@@ -93,9 +111,9 @@
                         href: '#/compentList/switch',
                     },
                     {
-                        title: 'S',
+                        title: 'T',
                         type: '4',
-                        id: 'headline_S',
+                        id: 'headline_T',
                         href: '#/compentList',
                     },
                     {

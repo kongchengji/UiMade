@@ -1,7 +1,7 @@
 # 下拉选择器
 
 ### 调用方式
-```
+``` html
     <wzcSelect :width="240" :height="50">
       <template v-slot:wzc_option>
 		<wzc_option v-for="(item) in showlist"
@@ -14,7 +14,7 @@
 
 
 
-```
+``` html
 showlist: [
     {
     item_name: '选项0',
