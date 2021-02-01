@@ -73,6 +73,9 @@
             this.allnums = this.imgarray.length;  
             let _this = this;
             let indexInterval = setInterval(function(){
+                if (!document.getElementById("imgView").offsetWidth) {
+                    clearInterval(indexInterval);
+                }
                 if(document.getElementById("imgView").offsetWidth > 0){
                     _this.initImg();
                     clearInterval(indexInterval);

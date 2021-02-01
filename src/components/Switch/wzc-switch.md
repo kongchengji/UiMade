@@ -4,6 +4,12 @@
 
 ### 使用代码
 
+<div class="demo-box">
+  <div class="demo-block" style="display:flex;margin: 30px;">
+    <wzc_switch active-color="#13ce66" inactive-color="#ff4949" ></wzc_switch>
+  </div>
+</div>
+
 ```html
 // 使用方式 isMove1：Boolean
 <wzc_switch :value.sync="isMove1"> </wzc_switch>
@@ -14,6 +20,8 @@
 >
 </wzc_switch>
 ```
+
+### 其他更多组件示例可见```概览```
 
 ### 可传递参数
 

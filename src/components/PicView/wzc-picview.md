@@ -23,6 +23,8 @@ npm install element-resize-detector
 </script>
 ```
 
+### 其他更多组件示例可见```概览```
+
 ### 传入数据
 
 | 参数     | 说明               | 类型    | 默认值 |

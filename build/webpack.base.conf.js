@@ -47,11 +47,11 @@ const vueMarkdown = {
           const html = utils.convertHtml(striptags(tokens[idx + 1].content, 'script'))
           // 移除描述，防止被添加到代码块
           tokens[idx + 2].children = [];
-          return `<demo-block>
-                        <div slot="desc">${html}</div>
-                        <div slot="highlight">`;
+          return `<div class="UiShow">
+                        ${html}
+                        `;
         }
-        return '</div></demo-block>\n';
+        return '</div>';
       }
     }]
   ]

@@ -21,8 +21,8 @@ export default new Router({
       component: guide,
       children: [
         // markdown 会被渲染在 guide 的 <router-view> 中
-        { path: '/guide/useIntroduct', component: r => require.ensure([], () => r(require('../components/select/wzc-select.md')))   },
-        { path: '/guide/design', component: r => require.ensure([], () => r(require('../components/button/wzc-button.md')))   },
+        { path: '/guide/useIntroduct', component: r => require.ensure([], () => r(require('../assets/mark/guideUI.md')))   },
+        { path: '/guide/design', component: r => require.ensure([], () => r(require('../assets/mark/designUI.md')))   },
       ]
     },
     {
@@ -30,6 +30,7 @@ export default new Router({
       name: 'compentList',
       component: compentList,
       children: [ 
+        { path: '/compentList', component: r => require.ensure([], () => r(require('../components/log.md'))) },
         { path: '/compentList/log', component: r => require.ensure([], () => r(require('../components/select/wzc-select.md'))) },
         { path: '/compentList/button', component: r => require.ensure([], () => r(require('../components/button/wzc-button.md'))) },
         { path: '/compentList/select', component: r => require.ensure([], () => r(require('../components/select/wzc-select.md'))) },

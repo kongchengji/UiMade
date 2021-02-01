@@ -20,7 +20,6 @@
                   { itemName: '指南', itemHref: '#/guide/useIntroduct' },
                   { itemName: '组件', itemHref: '#/compentList' },
                   { itemName: '概览', itemHref: '#/HelloWorld' },
-                  { itemName: '资源', itemHref: '' },
               ]
           }
       };

@@ -4,8 +4,17 @@
 
 ## 使用方式
 
+<div class="demo-box">
+  <div class="demo-block" style="display:flex;margin: 30px;">
+    <wzc_color_picker > </wzc_color_picker>
+  </div>
+</div>
+
+
+
 ```html
-// color : ffff00 <wzc_color_picker :color.sync="color1"> </wzc_color_picker>
+// color : ffff00 
+<wzc_color_picker :color.sync="color1"> </wzc_color_picker>
 ```
 
 ## 可传递参数

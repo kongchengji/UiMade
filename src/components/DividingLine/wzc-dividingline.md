@@ -2,8 +2,63 @@
 
 可以调用分割线组件，来对界面内容进行分割
 
-### 使用代码
 
+
+### 示例
+<div class="demo-box">
+  <div class="demo-block" style="margin: 30px;">
+    <div class="fenge">基础分割线</div>
+<wzc_dividingline></wzc_dividingline>
+<div class="fenge">分割线宽高调整 宽度800，高15, 颜色设置为#FF0000</div>
+<wzc_dividingline :width="800" :height="15" color="#FF0000">
+  <template v-slot:wzc_divide_title>
+    <i class="fa fa-bed"></i>
+  </template>
+</wzc_dividingline>
+<div class="fenge">分割线上设置内容和位置</div>
+<wzc_dividingline>
+  <template v-slot:wzc_divide_title>
+    <div>空城机的组件</div>
+  </template>
+</wzc_dividingline>
+<wzc_dividingline title-position="center" color="#0000FF">
+  <template v-slot:wzc_divide_title>
+    <i class="fa fa-check-square"></i>
+  </template>
+</wzc_dividingline>
+<wzc_dividingline title-position="right">
+  <template v-slot:wzc_divide_title>
+    <div>空城机<i class="fa fa-eye-slash"></i></div>
+  </template>
+</wzc_dividingline>
+<div class="fenge">分割线垂直</div>
+<div class="buttonlist">
+  <wzc_dividingline title-position="center" vertical :height="100">
+    <template v-slot:wzc_divide_title>
+      <i class="fa fa-check-square"></i>
+    </template>
+  </wzc_dividingline>
+  <wzc_dividingline title-position="top" vertical :height="100">
+    <template v-slot:wzc_divide_title>
+      <i class="fa fa-check-square"></i>
+    </template>
+  </wzc_dividingline>
+  <wzc_dividingline title-position="bottom" vertical :height="100">
+    <template v-slot:wzc_divide_title>
+      <i class="fa fa-check-square"></i>
+    </template>
+  </wzc_dividingline>
+  <wzc_dividingline title-position="center" vertical :height="100">
+    <template v-slot:wzc_divide_title>
+      空城机
+    </template>
+  </wzc_dividingline>
+  <wzc_dividingline vertical :height="100"> </wzc_dividingline>
+</div>
+  </div>
+</div>
+
+### 使用代码
 ```html
 <div class="fenge">基础分割线</div>
 <wzc_dividingline></wzc_dividingline>
@@ -54,6 +109,8 @@
   <wzc_dividingline vertical :height="100"> </wzc_dividingline>
 </div>
 ```
+
+
 
 ### 可传递参数
 
