@@ -16,10 +16,16 @@
 </script>
 ```
 
-<wzc_button @click.native="buttonAlert"> 默认按钮 </wzc_button>
-<wzc_button type="primary" @click.native="buttonAlert">
-主要按钮
-</wzc_button>
+
+<div class="demo-box">
+  <div class="demo-block">
+    <wzc_button> 默认按钮 </wzc_button>
+    <wzc_button type="primary"> 主要按钮 </wzc_button>
+  </div>
+
+  
+</div>
+
 
 ### 可传递参数
 

@@ -11,9 +11,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "element-resize-detector": "^1.2.1",
     "font-awesome": "^4.7.0",
     "github-markdown-css": "^4.0.0",
     "jquery": "^3.5.1",
+    "kongchengji": "^1.0.1",
     "marked": "^1.2.7",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
