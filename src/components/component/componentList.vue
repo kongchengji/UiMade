@@ -75,6 +75,18 @@
                         href: '#/compentList/dividingline',
                     },
                     {
+                        title: 'I',
+                        type: '4',
+                        id: 'headline_I',
+                        href: '#/compentList',
+                    },
+                    {
+                        title: 'Input 输入框',
+                        type: '2',
+                        id: 'Input',
+                        href: '#/compentList/Input',
+                    },
+                    {
                         title: 'P',
                         type: '4',
                         id: 'headline_P',

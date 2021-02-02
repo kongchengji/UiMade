@@ -1,6 +1,10 @@
 <template>
   <div class="hello">
-    
+    <h2> input 输入框 </h2>
+    <div class="buttonlist"> 
+      <wzc_input v-model="input1"></wzc_input>
+      {{ input1 }}
+    </div>
 
     <h2> Collapse 折叠面板 </h2>
     <div class="buttonlist">
@@ -309,7 +313,8 @@ import wzc_color_picker from "./ColorPicker/wzc-color-picker";
 import wzc_timeline from "./TimeLine/wzc-timeline";
 import wzc_timeline_option from "./TimeLine/wzc-timeline-option";
 import wzc_dividingline from "./DividingLine/wzc-dividingline";
-import wzc_picview from "./PicView/wzc-picview"
+import wzc_picview from "./PicView/wzc-picview";
+import wzc_input from "./input/wzc-input";
 
 export default {
   name: "HelloWorld",
@@ -326,6 +331,7 @@ export default {
     wzc_timeline_option,
     wzc_dividingline,
     wzc_picview,
+    wzc_input,
   },
   data() {
     return {
@@ -335,6 +341,7 @@ export default {
       sliderValue2: 20,
       sliderValue3: 42,
       picshow: false,
+      input1:"",
       showlist: [
         {
           item_name: "选项0",
