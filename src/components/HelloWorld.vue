@@ -2,17 +2,21 @@
   <div class="hello">
     <h2> input 输入框 </h2>
     <div class="buttonlist"> 
-      <div class="buttonlist"> 
-        <div class="sliders_text" style="word-wrap:break-word"> v-model输入框数据： {{ input1 }}</div>
+      <div class="buttonlist" > 
+        <div class="sliders_text"  > 基础输入框 </div>
         <wzc_input v-model="input1"></wzc_input>     
-      </div> 
-      <div class="buttonlist"> 
-        <div class="sliders_text"  > 禁用input输入框 </div>
-        <wzc_input v-model="input2" disabled></wzc_input>     
       </div> 
       <div class="buttonlist"> 
         <div class="sliders_text"  > 清空输入框 </div>
         <wzc_input v-model="input1" clear></wzc_input>     
+      </div> 
+      <div class="buttonlist"> 
+        <div class="sliders_text"  > 密码输入框 </div>
+        <wzc_input v-model="input1" password></wzc_input>     
+      </div> 
+      <div class="buttonlist"> 
+        <div class="sliders_text"  > 禁用input输入框 </div>
+        <wzc_input v-model="input1" disabled></wzc_input>     
       </div> 
     </div>
 

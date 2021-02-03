@@ -7,6 +7,12 @@
         <wzc_timeline_option key="20" timestamp="时间日志" size="20px" >
             <div v-html="`<p>组件编写</p>`"></div>
         </wzc_timeline_option>
+         <wzc_timeline_option key="22" timestamp="Feb 3, 2021 (2021年 2月 3日)" size="16px" icon="fa-window-restore">
+            <div v-html="`<p>input组件编写完成，更新发布npm组件至1.0.4版本</p>`"></div>
+        </wzc_timeline_option>
+        <wzc_timeline_option key="21" timestamp="Feb 2, 2021 (2021年 2月 2日)" size="16px" icon="fa-user-o">
+            <div v-html="`<p>开始编写input输入框，使用v-model进行双向绑定</p> `"></div>
+        </wzc_timeline_option>
         <wzc_timeline_option key="19" timestamp="Feb 1, 2021 (2021年 2月 1日)" size="16px" icon="fa-eyedropper">
             <div v-html="`<p>将组件发布到npm，并适配markdown文件中的组件使用</p>
             <p>更新npm中组件，使得element-resize-detector不需要独立下载</p>
@@ -80,3 +86,5 @@
     </wzc_timeline>
   </div>
 </div>
+
+<br/>
