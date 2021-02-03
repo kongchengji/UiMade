@@ -2,8 +2,18 @@
   <div class="hello">
     <h2> input 输入框 </h2>
     <div class="buttonlist"> 
-      <wzc_input v-model="input1"></wzc_input>
-      {{ input1 }}
+      <div class="buttonlist"> 
+        <div class="sliders_text" style="word-wrap:break-word"> v-model输入框数据： {{ input1 }}</div>
+        <wzc_input v-model="input1"></wzc_input>     
+      </div> 
+      <div class="buttonlist"> 
+        <div class="sliders_text"  > 禁用input输入框 </div>
+        <wzc_input v-model="input2" disabled></wzc_input>     
+      </div> 
+      <div class="buttonlist"> 
+        <div class="sliders_text"  > 清空输入框 </div>
+        <wzc_input v-model="input1" clear></wzc_input>     
+      </div> 
     </div>
 
     <h2> Collapse 折叠面板 </h2>
@@ -342,6 +352,7 @@ export default {
       sliderValue3: 42,
       picshow: false,
       input1:"",
+      input2: "",
       showlist: [
         {
           item_name: "选项0",
@@ -488,10 +499,14 @@ h2 {
 }
 .sliders_text {
   width: 200px;
+  line-height: 40px;
 }
 .fenge {
   margin: 15px 0px;
   width: 100%;
   background-color: blanchedalmond;
+}
+.wzc_input {
+  margin-left: 100px;
 }
 </style>
